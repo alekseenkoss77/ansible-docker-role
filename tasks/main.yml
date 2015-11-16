@@ -4,7 +4,7 @@
   register: docker_path
 
 - name: Docker | Install
-  command: /usr/bin/curl -sSL https://get.docker.com/ | sh
+  shell: /usr/bin/curl -sSL https://get.docker.com/ | sh
   sudo: yes
   when: docker_path.stat.exists == False
 

@@ -1,12 +1,12 @@
 ---
 - name: Docker | Check installed
-  stat: /usr/bin/docker
-  register: installed_docker
+  stat: path=/usr/bin/docker
+  register: docker_path
 
 - name: Docker | Install
   command: /usr/bin/curl -sSL https://get.docker.com/ | sh
   sudo: yes
-  when: installed_docker.stat.exists == False
+  when: docker_path.stat.exists == False
 
 - name: Docker | create docker group
   group: name=docker state=present

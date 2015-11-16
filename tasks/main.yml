@@ -14,3 +14,4 @@
 
 - name: Docker | add user to docker group
   user: name={{ docker_user }} group=docker
+  when: docker_user is defined

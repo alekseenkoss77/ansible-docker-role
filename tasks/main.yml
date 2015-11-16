@@ -1,0 +1,16 @@
+---
+- name: Docker | Check installed
+  stat: /usr/bin/docker
+  register: installed_docker
+
+- name: Docker | Install
+  command: /usr/bin/curl -sSL https://get.docker.com/ | sh
+  sudo: yes
+  when: installed_docker.stat.exists == False
+
+- name: Docker | create docker group
+  group: name=docker state=present
+  when: docker_group == True
+
+- name: Docker | add user to docker group
+  user: name={{ docker_user }} group=docker
